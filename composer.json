@@ -1,11 +1,11 @@
 {
-	"name": "silverstripe/sspak",
+	"name": "loveduckie/sspak",
 	"description": "CLI tool for saving & loading data in SilverStripe installations",
 	"license": "BSD-3-Clause",
 	"authors": [
 		{
-			"name": "Sam Minnee",
-			"email": "sam@silverstripe.com"
+			"name": "Luc Shelton",
+			"email": "lucshelton@gmail.com"
 		}
 	],
 	"autoload": {
