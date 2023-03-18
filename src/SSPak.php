@@ -331,17 +331,18 @@ EOM;
 
 		$filenameArg = escapeshellarg($filename);
 
-		// detect if mysql supports the --column-statistics flag
-		$res = $webroot->exec("mysqldump $usernameArg $passwordArg $hostArg $portArg $databaseArg --column-statistics=0", ['throwException' => false]);
-		if ($res['return'] == 1) {
-			// e.g. Usage: mysqldump [OPTIONS] database [tables]
-			$columnStatistics = '--column-statistics=0';
-		} else {
-			// e.g. '[ERROR] unknown option'
-			$columnStatistics = '';
-		}
+		// // detect if mysql supports the --column-statistics flag
+		// $res = $webroot->exec("mysqldump $usernameArg $passwordArg $hostArg $portArg $databaseArg --column-statistics=0", ['throwException' => false]);
+		// if ($res['return'] == 1) {
+		// 	// e.g. Usage: mysqldump [OPTIONS] database [tables]
+		// 	$columnStatistics = '--column-statistics=0';
+		// } else {
+		// 	// e.g. '[ERROR] unknown option'
+		// 	$columnStatistics = '';
+		// }
 
-		$process = $webroot->createProcess("mysqldump --no-tablespaces --skip-opt --add-drop-table --extended-insert --create-options --quick  --set-charset --default-character-set=utf8 $columnStatistics $usernameArg $passwordArg $hostArg $portArg $databaseArg | gzip -c");
+		$process = $webroot->createProcess("mysqldump --no-tablespaces --skip-opt --add-drop-table --extended-insert --create-options --quick  --set-charset --default-character-set=utf8 $usernameArg $passwordArg $hostArg $portArg $databaseArg | gzip -c");
+		// $process = $webroot->createProcess("mysqldump --no-tablespaces --skip-opt --add-drop-table --extended-insert --create-options --quick  --set-charset --default-character-set=utf8 $columnStatistics $usernameArg $passwordArg $hostArg $portArg $databaseArg | gzip -c");
 		$sspak->writeFileFromProcess($filename, $process);
 		return true;
 	}
